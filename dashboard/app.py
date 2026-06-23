@@ -19,8 +19,8 @@ S3_OUTPUT  = 's3://lks-data-lake-[namakamu]/athena-results/'
 # Endpoint 1: Semua transaksi
 # Endpoint 1: Semua transaksi
 @app.route('/')
-def get_transactions():
-    return jsonify({'WEB SAYA': f'TEMA'})
+def beranda():
+    return "Halo, dashboard berhasil diakses!"
 
 @app.route('/transactions')
 def get_transactions():
