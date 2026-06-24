@@ -6,14 +6,14 @@ from groq import Groq
 app = Flask(__name__)
 
 
-dynamodb = boto3.resource('dynamodb', region_name='ap-southeast-1')
-athena  = boto3.client('athena',   region_name='ap-southeast-1')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+athena  = boto3.client('athena',   region_name='us-east-1')
 groq_client = Groq(api_key=os.environ.get('GROQ_API_KEY'))
 
 
 TABLE_NAME = 'lks-transactions'
 ATHENA_DB  = 'lks_analytics'
-S3_OUTPUT  = 's3://lks-data-lake-[namakamu]/athena-results/'
+S3_OUTPUT  = 's3://lks-data-lake-temabanil1/athena-results/'
 
 
 # Endpoint 1: Semua transaksi
