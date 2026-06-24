@@ -29,7 +29,21 @@ def get_transactions():
     return jsonify(result['Items'])
 
 
-
+# Endpoint 2: Analitik aggregat via Athena
+@app.route('/analytics')
+def get_analytics():
+    query = '''
+        SELECT COUNT(*) AS total,
+               SUM(amount) AS total_amount,
+               COUNT(CASE WHEN fraud_flag=true THEN 1 END) AS fraud_count
+        FROM lks_analytics.transactions
+    '''
+    response = athena.start_query_execution(
+        QueryString=query,
+        QueryExecutionContext={'Database': ATHENA_DB},
+        ResultConfiguration={'OutputLocation': S3_OUTPUT}
+    )
+    return jsonify({'query_execution_id': response['QueryExecutionId']})
 
 
 # Endpoint 3: AI Analysis dengan Groq
